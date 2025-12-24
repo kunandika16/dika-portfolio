@@ -138,7 +138,7 @@ const AboutPage = () => {
   const [totalProjects, setTotalProjects] = useState(0);
   const [totalCertificates, setTotalCertificates] = useState(0);
   const [profileData, setProfileData] = useState({
-    name: "Fazri Lukman Nurrohman",
+    name: "Andika Rian Ansari",
     description:
       "Seorang lulusan Teknik Jaringan Komputer dan Telekomunikasi yang memiliki ketertarikan besar dalam pengembangan Front-End. Saya berfokus pada menciptakan pengalaman digital yang menarik dan selalu berusaha memberikan solusi terbaik dalam setiap proyek yang saya kerjakan.",
     photo_url: "/Photo.jpg",

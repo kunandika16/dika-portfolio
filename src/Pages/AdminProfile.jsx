@@ -29,7 +29,7 @@ const AdminProfile = () => {
     github_url: "https://github.com/Fazrilukman",
     linkedin_url: "https://www.linkedin.com/in/fazrilukman/",
     instagram_url: "https://www.instagram.com/fazrilukman_/?hl=id",
-    name: "Fazri Lukman Nurrohman",
+    name: "Andika Rian Ansari",
     description:
       "Seorang lulusan Teknik Jaringan Komputer dan Telekomunikasi yang memiliki ketertarikan besar dalam pengembangan Front-End. Saya berfokus pada menciptakan pengalaman digital yang menarik dan selalu berusaha memberikan solusi terbaik dalam setiap proyek yang saya kerjakan.",
     cv_link:
@@ -76,7 +76,7 @@ const AdminProfile = () => {
           github_url: data.github_url || "",
           linkedin_url: data.linkedin_url || "",
           instagram_url: data.instagram_url || "",
-          name: data.name || "Fazri Lukman Nurrohman",
+          name: data.name || "Andika Rian Ansari",
           description: data.description || "",
           cv_link: data.cv_link || "",
           linkedin_connect: data.linkedin_connect || "",
