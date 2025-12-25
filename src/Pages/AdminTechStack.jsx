@@ -197,7 +197,7 @@ const AdminTechStack = () => {
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#ef4444',
+      confirmButtonColor: '#38bdf8',
       cancelButtonColor: '#6b7280',
       confirmButtonText: 'Yes, delete it!',
       background: '#1f2937',
@@ -239,7 +239,7 @@ const AdminTechStack = () => {
           </div>
           <button
             onClick={() => handleOpenModal()}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-lg transition-all shadow-lg hover:shadow-xl"
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-700 hover:to-cyan-700 text-white rounded-lg transition-all shadow-lg hover:shadow-xl"
           >
             <Plus className="w-5 h-5" />
             Add Tech Stack
@@ -254,7 +254,7 @@ const AdminTechStack = () => {
             placeholder="Search tech stack..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
           />
         </div>
 
@@ -262,7 +262,7 @@ const AdminTechStack = () => {
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
-              <div className="w-16 h-16 border-4 border-red-500/30 border-t-red-500 rounded-full animate-spin mx-auto mb-4" />
+              <div className="w-16 h-16 border-4 border-sky-500/30 border-t-sky-500 rounded-full animate-spin mx-auto mb-4" />
               <p className="text-gray-400">Loading tech stack...</p>
             </div>
           </div>
@@ -298,14 +298,14 @@ const AdminTechStack = () => {
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleOpenModal(stack)}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 rounded-lg transition-colors"
                   >
                     <Edit2 className="w-4 h-4" />
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(stack.id)}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 rounded-lg transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                     Delete
@@ -319,7 +319,7 @@ const AdminTechStack = () => {
 
       {showModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
-          <div className="bg-[#140003] border border-white/10 rounded-xl w-full max-w-2xl my-8">
+          <div className="bg-[#030712] border border-white/10 rounded-xl w-full max-w-2xl my-8">
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <h2 className="text-2xl font-bold text-white">
                 {editingStack ? 'Edit Tech Stack' : 'Add Tech Stack'}
@@ -341,7 +341,7 @@ const AdminTechStack = () => {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
                   placeholder="e.g. ReactJS"
                   required
                 />
@@ -355,7 +355,7 @@ const AdminTechStack = () => {
                   type="number"
                   value={formData.sort_order}
                   onChange={(e) => setFormData({ ...formData, sort_order: e.target.value })}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
                   placeholder="0"
                 />
                 <p className="text-xs text-gray-500 mt-1">Lower numbers appear first</p>
@@ -380,7 +380,7 @@ const AdminTechStack = () => {
                         setImageFile(null);
                         setFormData({ ...formData, icon_url: '' });
                       }}
-                      className="absolute top-2 right-2 p-1 bg-red-500/80 hover:bg-red-500 rounded-full transition-colors"
+                      className="absolute top-2 right-2 p-1 bg-sky-500/80 hover:bg-sky-500 rounded-full transition-colors"
                     >
                       <X className="w-4 h-4 text-white" />
                     </button>
@@ -389,7 +389,7 @@ const AdminTechStack = () => {
 
                 <div className="flex gap-2 mb-2">
                   <label className="flex-1 cursor-pointer">
-                    <div className="flex items-center justify-center gap-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors border border-red-500/30">
+                    <div className="flex items-center justify-center gap-2 px-4 py-2 bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 rounded-lg transition-colors border border-sky-500/30">
                       <Upload className="w-5 h-5" />
                       <span>{imageFile ? imageFile.name : 'Upload Icon'}</span>
                     </div>
@@ -416,7 +416,7 @@ const AdminTechStack = () => {
                     setImagePreview(e.target.value);
                     setImageFile(null);
                   }}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
                   placeholder="https://example.com/icon.svg"
                 />
                 <p className="text-xs text-gray-500 mt-1">Upload an image or paste an icon URL</p>
@@ -433,7 +433,7 @@ const AdminTechStack = () => {
                 <button
                   type="submit"
                   disabled={submitting || uploadingImage}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-lg transition-all disabled:opacity-50"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-700 hover:to-cyan-700 text-white rounded-lg transition-all disabled:opacity-50"
                 >
                   {uploadingImage ? (
                     <>

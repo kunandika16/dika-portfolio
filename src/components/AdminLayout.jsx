@@ -55,7 +55,7 @@ const AdminLayout = ({ children, activePage }) => {
   const adminUser = sessionStorage.getItem('adminUser') || 'Admin';
 
   return (
-    <div className="min-h-screen bg-[#030014]">
+    <div className="min-h-screen bg-[#030712]">
       {/* Top Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 h-16 bg-white/5 backdrop-blur-lg border-b border-white/10 z-50">
         <div className="h-full px-4 flex items-center justify-between">
@@ -79,7 +79,7 @@ const AdminLayout = ({ children, activePage }) => {
             </span>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 rounded-lg transition-colors"
             >
               <LogOut className="w-4 h-4" />
               <span className="hidden sm:block">Logout</span>

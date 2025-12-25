@@ -37,7 +37,7 @@ const BackgroundEffect = () => (
       className="absolute inset-0 opacity-40"
       style={{
         background:
-          "radial-gradient(circle at center, rgba(220,38,38,0.15), transparent 70%)",
+          "radial-gradient(circle at center, rgba(14,165,233,0.15), transparent 70%)",
       }}
     />
     <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
@@ -49,18 +49,18 @@ const IconButton = ({ Icon, label, delay }) => (
     className="relative group animate-float"
     style={{ animationDelay: delay }}
   >
-    <div className="absolute -inset-2 bg-gradient-to-r from-red-600/20 to-rose-600/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition duration-500" />
+    <div className="absolute -inset-2 bg-gradient-to-r from-sky-600/20 to-cyan-600/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition duration-500" />
     <div className="relative flex flex-col items-center gap-2 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-colors">
-      <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-red-500/20 to-rose-500/20 group-hover:scale-110 transition-transform duration-300">
-        <Icon className="w-5 h-5 text-rose-300" />
+      <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500/20 to-cyan-500/20 group-hover:scale-110 transition-transform duration-300">
+        <Icon className="w-5 h-5 text-sky-300" />
       </span>
       <span className="text-[0.65rem] uppercase tracking-[0.2em] text-gray-400 group-hover:text-white transition-colors">
         {label}
       </span>
 
       {/* Corner accents */}
-      <div className="absolute top-0 left-0 w-2 h-2 border-l border-t border-rose-500/30 opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className="absolute bottom-0 right-0 w-2 h-2 border-r border-b border-rose-500/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute top-0 left-0 w-2 h-2 border-l border-t border-sky-500/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-r border-b border-sky-500/30 opacity-0 group-hover:opacity-100 transition-opacity" />
     </div>
   </div>
 );
@@ -73,7 +73,7 @@ const NetworkAnimation = () => {
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-rose-500 rounded-full"
+          className="absolute w-1 h-1 bg-sky-500 rounded-full"
           initial={{
             x: Math.random() * 100 + "%",
             y: Math.random() * 100 + "%",
@@ -110,9 +110,9 @@ const NetworkAnimation = () => {
             x2="100%"
             y2="100%"
           >
-            <stop offset="0%" stopColor="rgba(244, 63, 94, 0)" />
-            <stop offset="50%" stopColor="rgba(244, 63, 94, 0.2)" />
-            <stop offset="100%" stopColor="rgba(244, 63, 94, 0)" />
+            <stop offset="0%" stopColor="rgba(14, 165, 233, 0)" />
+            <stop offset="50%" stopColor="rgba(14, 165, 233, 0.2)" />
+            <stop offset="100%" stopColor="rgba(14, 165, 233, 0)" />
           </linearGradient>
         </defs>
         <motion.circle
@@ -188,7 +188,7 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
                 Andika Rian Ansari
               </div>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[0.6rem] uppercase tracking-[0.2em] text-gray-400 backdrop-blur-sm">
-                <Cpu className="w-3 h-3 text-rose-400" />
+                <Cpu className="w-3 h-3 text-sky-400" />
                 Freelancer
               </div>
             </motion.div>
@@ -200,13 +200,13 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
               transition={{ delay: 0.4 }}
               className="relative mb-8"
             >
-              <div className="absolute -inset-10 bg-rose-500/20 blur-[50px] rounded-full opacity-50 animate-pulse" />
+              <div className="absolute -inset-10 bg-sky-500/20 blur-[50px] rounded-full opacity-50 animate-pulse" />
               <h1 className="relative text-5xl md:text-7xl font-bold tracking-tight text-white mb-4">
                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-gray-400">
                   Wellcome to My Portfolio
                 </span>
               </h1>
-              <div className="h-1 w-24 mx-auto bg-gradient-to-r from-transparent via-rose-500 to-transparent rounded-full" />
+              <div className="h-1 w-24 mx-auto bg-gradient-to-r from-transparent via-sky-500 to-transparent rounded-full" />
             </motion.div>
 
             {/* Typewriter Subtitle */}
@@ -217,7 +217,7 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
               className="mb-12"
             >
               <div className="text-xl md:text-2xl font-light text-gray-300 font-mono">
-                <span className="text-rose-500">{">"}</span>{" "}
+                <span className="text-sky-500">{">"}</span>{" "}
                 <TypewriterEffect
                   text="Initializing Creative Portfolio..."
                   speed={50}

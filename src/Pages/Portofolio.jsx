@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 
-import { supabase } from "../supabase"; 
+import { supabase } from "../supabase";
 
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
@@ -16,7 +16,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Certificate from "../components/Certificate";
 import { Code, Award, Boxes } from "lucide-react";
-
 
 const ToggleButton = ({ onClick, isShowingMore }) => (
   <button
@@ -60,22 +59,27 @@ const ToggleButton = ({ onClick, isShowingMore }) => (
         className={`
           transition-transform 
           duration-300 
-          ${isShowingMore ? "group-hover:-translate-y-0.5" : "group-hover:translate-y-0.5"}
+          ${
+            isShowingMore
+              ? "group-hover:-translate-y-0.5"
+              : "group-hover:translate-y-0.5"
+          }
         `}
       >
-        <polyline points={isShowingMore ? "18 15 12 9 6 15" : "6 9 12 15 18 9"}></polyline>
+        <polyline
+          points={isShowingMore ? "18 15 12 9 6 15" : "6 9 12 15 18 9"}
+        ></polyline>
       </svg>
     </span>
-    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-500/50 transition-all duration-300 group-hover:w-full"></span>
+    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-500/50 transition-all duration-300 group-hover:w-full"></span>
   </button>
 );
-
 
 function TabPanel({ children, value, index, ...other }) {
   return (
     <div
       role="tabpanel"
-      style={{ display: value !== index ? 'none' : 'block' }}
+      style={{ display: value !== index ? "none" : "block" }}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
@@ -130,7 +134,7 @@ export default function FullWidthTabs() {
   const [techStackLoading, setTechStackLoading] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [showAllCertificates, setShowAllCertificates] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('Project');
+  const [selectedCategory, setSelectedCategory] = useState("Project");
   const isMobile = window.innerWidth < 768;
   const initialItems = isMobile ? 4 : 6;
 
@@ -149,7 +153,6 @@ export default function FullWidthTabs() {
     }
   }, [projects, selectedCategory, showAllProjects]);
 
-
   const normalizeTechStack = (items) => {
     return (items || [])
       .filter((item) => item?.name && item?.icon_url)
@@ -161,7 +164,7 @@ export default function FullWidthTabs() {
       })
       .map((item) => ({
         icon: item.icon_url,
-        language: item.name
+        language: item.name,
       }));
   };
 
@@ -169,23 +172,33 @@ export default function FullWidthTabs() {
     try {
       // Mengambil data dari Supabase secara paralel
       setTechStackLoading(true);
-      const [projectsResponse, certificatesResponse, techStackResponse] = await Promise.all([
-        supabase.from("projects").select("*").order('id', { ascending: true }),
-        supabase.from("certificates").select("*").order('id', { ascending: true }), 
-        supabase.from("tech_stack").select("*").order('sort_order', { ascending: true }),
-      ]);
+      const [projectsResponse, certificatesResponse, techStackResponse] =
+        await Promise.all([
+          supabase
+            .from("projects")
+            .select("*")
+            .order("id", { ascending: true }),
+          supabase
+            .from("certificates")
+            .select("*")
+            .order("id", { ascending: true }),
+          supabase
+            .from("tech_stack")
+            .select("*")
+            .order("sort_order", { ascending: true }),
+        ]);
 
       // Error handling untuk setiap request
       if (projectsResponse.error) {
-        console.error('Projects fetch error:', projectsResponse.error);
+        console.error("Projects fetch error:", projectsResponse.error);
         throw projectsResponse.error;
       }
       if (certificatesResponse.error) {
-        console.error('Certificates fetch error:', certificatesResponse.error);
+        console.error("Certificates fetch error:", certificatesResponse.error);
         throw certificatesResponse.error;
       }
       if (techStackResponse.error) {
-        console.error('Tech stack fetch error:', techStackResponse.error);
+        console.error("Tech stack fetch error:", techStackResponse.error);
       }
 
       // Supabase mengembalikan data dalam properti 'data'
@@ -211,22 +224,20 @@ export default function FullWidthTabs() {
     }
   }, []);
 
-
-
   useEffect(() => {
     // Coba ambil dari localStorage dulu untuk laod lebih cepat
-    const cachedProjects = localStorage.getItem('projects');
-    const cachedCertificates = localStorage.getItem('certificates');
-    const cachedTechStack = localStorage.getItem('tech_stack');
+    const cachedProjects = localStorage.getItem("projects");
+    const cachedCertificates = localStorage.getItem("certificates");
+    const cachedTechStack = localStorage.getItem("tech_stack");
 
     if (cachedProjects && cachedCertificates) {
-        setProjects(JSON.parse(cachedProjects));
-        setCertificates(JSON.parse(cachedCertificates));
+      setProjects(JSON.parse(cachedProjects));
+      setCertificates(JSON.parse(cachedCertificates));
     }
     if (cachedTechStack) {
-        setTechStacks(JSON.parse(cachedTechStack));
+      setTechStacks(JSON.parse(cachedTechStack));
     }
-    
+
     fetchData(); // Tetap panggil fetchData untuk sinkronisasi data terbaru
   }, [fetchData]);
 
@@ -235,41 +246,56 @@ export default function FullWidthTabs() {
   };
 
   const toggleShowMore = useCallback((type) => {
-    if (type === 'projects') {
-      setShowAllProjects(prev => !prev);
+    if (type === "projects") {
+      setShowAllProjects((prev) => !prev);
     } else {
-      setShowAllCertificates(prev => !prev);
+      setShowAllCertificates((prev) => !prev);
     }
   }, []);
 
   // Filter projects berdasarkan kategori yang dipilih
-  const filteredProjects = projects.filter(project => {
-    const projectCategory = project.category || 'Project'; // Default ke 'Project' jika tidak ada category
+  const filteredProjects = projects.filter((project) => {
+    const projectCategory = project.category || "Project"; // Default ke 'Project' jika tidak ada category
     return projectCategory === selectedCategory;
   });
 
-  const displayedProjects = showAllProjects ? filteredProjects : filteredProjects.slice(0, initialItems);
-  const displayedCertificates = showAllCertificates ? certificates : certificates.slice(0, initialItems);
+  const displayedProjects = showAllProjects
+    ? filteredProjects
+    : filteredProjects.slice(0, initialItems);
+  const displayedCertificates = showAllCertificates
+    ? certificates
+    : certificates.slice(0, initialItems);
 
   // Sisa dari komponen (return statement) tidak ada perubahan
   return (
-    <div className="md:px-[10%] px-[5%] w-full sm:mt-0 mt-[3rem] overflow-hidden" id="Portofolio">
+    <div
+      className="md:px-[10%] px-[5%] w-full sm:mt-0 mt-[3rem] overflow-hidden"
+      id="Portofolio"
+    >
       {/* Header section - unchanged */}
-      <div className="text-center pb-10" data-aos="fade-up" data-aos-duration="1000">
-        <h2 className="inline-block text-3xl md:text-5xl font-bold text-center mx-auto text-transparent bg-clip-text bg-gradient-to-r from-[#dc2626] to-[#f43f5e]">
-          <span style={{
-            color: '#dc2626',
-            backgroundImage: 'linear-gradient(45deg, #dc2626 10%, #f43f5e 93%)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>
+      <div
+        className="text-center pb-10"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+      >
+        <h2 className="inline-block text-3xl md:text-5xl font-bold text-center mx-auto text-transparent bg-clip-text bg-gradient-to-r from-[#0ea5e9] to-[#06b6d4]">
+          <span
+            style={{
+              color: "#0ea5e9",
+              backgroundImage:
+                "linear-gradient(45deg, #0ea5e9 10%, #06b6d4 93%)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             Portfolio Showcase
           </span>
         </h2>
         <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base mt-2">
-          Explore my journey through projects, certifications, and technical expertise. 
-          Each section represents a milestone in my continuous learning path.
+          Explore my journey through projects, certifications, and technical
+          expertise. Each section represents a milestone in my continuous
+          learning path.
         </p>
       </div>
 
@@ -291,7 +317,8 @@ export default function FullWidthTabs() {
               left: 0,
               right: 0,
               bottom: 0,
-              background: "linear-gradient(180deg, rgba(244, 63, 94, 0.03) 0%, rgba(220, 38, 38, 0.03) 100%)",
+              background:
+                "linear-gradient(180deg, rgba(14, 165, 233, 0.03) 0%, rgba(14, 165, 233, 0.03) 100%)",
               backdropFilter: "blur(10px)",
               zIndex: 0,
             },
@@ -319,7 +346,7 @@ export default function FullWidthTabs() {
                 borderRadius: "12px",
                 "&:hover": {
                   color: "#ffffff",
-                  backgroundColor: "rgba(244, 63, 94, 0.1)",
+                  backgroundColor: "rgba(14, 165, 233, 0.1)",
                   transform: "translateY(-2px)",
                   "& .lucide": {
                     transform: "scale(1.1) rotate(5deg)",
@@ -327,8 +354,9 @@ export default function FullWidthTabs() {
                 },
                 "&.Mui-selected": {
                   color: "#fff",
-                  background: "linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(220, 38, 38, 0.2))",
-                  boxShadow: "0 4px 15px -3px rgba(244, 63, 94, 0.2)",
+                  background:
+                    "linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(14, 165, 233, 0.2))",
+                  boxShadow: "0 4px 15px -3px rgba(14, 165, 233, 0.2)",
                   "& .lucide": {
                     color: "#a78bfa",
                   },
@@ -343,17 +371,23 @@ export default function FullWidthTabs() {
             }}
           >
             <Tab
-              icon={<Code className="mb-2 w-5 h-5 transition-all duration-300" />}
+              icon={
+                <Code className="mb-2 w-5 h-5 transition-all duration-300" />
+              }
               label="Projects"
               {...a11yProps(0)}
             />
             <Tab
-              icon={<Award className="mb-2 w-5 h-5 transition-all duration-300" />}
+              icon={
+                <Award className="mb-2 w-5 h-5 transition-all duration-300" />
+              }
               label="Certificates"
               {...a11yProps(1)}
             />
             <Tab
-              icon={<Boxes className="mb-2 w-5 h-5 transition-all duration-300" />}
+              icon={
+                <Boxes className="mb-2 w-5 h-5 transition-all duration-300" />
+              }
               label="Tech Stack"
               {...a11yProps(2)}
             />
@@ -367,9 +401,13 @@ export default function FullWidthTabs() {
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
             {/* Category Filter */}
-            <div className="mb-8 flex justify-center overflow-x-auto px-4 sm:px-0" data-aos="fade-down" data-aos-duration="800">
+            <div
+              className="mb-8 flex justify-center overflow-x-auto px-4 sm:px-0"
+              data-aos="fade-down"
+              data-aos-duration="800"
+            >
               <div className="inline-flex bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-1.5 sm:p-2 gap-1 sm:gap-2 min-w-max">
-                {['Project', 'Design', 'Editing'].map((category) => (
+                {["Project", "Design", "Editing"].map((category) => (
                   <button
                     key={category}
                     onClick={() => {
@@ -378,9 +416,10 @@ export default function FullWidthTabs() {
                     }}
                     className={`
                       px-4 sm:px-8 py-2 sm:py-3 rounded-xl font-semibold text-sm sm:text-base transition-all duration-400 whitespace-nowrap
-                      ${selectedCategory === category
-                        ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-lg shadow-red-500/30'
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      ${
+                        selectedCategory === category
+                          ? "bg-gradient-to-r from-sky-600 to-cyan-600 text-white shadow-lg shadow-sky-500/30"
+                          : "text-gray-400 hover:text-white hover:bg-white/5"
                       }
                     `}
                   >
@@ -394,7 +433,9 @@ export default function FullWidthTabs() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
                 {displayedProjects.length === 0 && projects.length > 0 && (
                   <div className="col-span-full text-center py-20">
-                    <p className="text-gray-400 text-lg">No projects found in this category</p>
+                    <p className="text-gray-400 text-lg">
+                      No projects found in this category
+                    </p>
                   </div>
                 )}
                 {displayedProjects.length === 0 && projects.length === 0 && (
@@ -423,7 +464,7 @@ export default function FullWidthTabs() {
             {filteredProjects.length > initialItems && (
               <div className="mt-6 w-full flex justify-start">
                 <ToggleButton
-                  onClick={() => toggleShowMore('projects')}
+                  onClick={() => toggleShowMore("projects")}
                   isShowingMore={showAllProjects}
                 />
               </div>
@@ -436,8 +477,20 @@ export default function FullWidthTabs() {
                 {displayedCertificates.map((certificate, index) => (
                   <div
                     key={certificate.id || index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
+                    data-aos={
+                      index % 3 === 0
+                        ? "fade-up-right"
+                        : index % 3 === 1
+                        ? "fade-up"
+                        : "fade-up-left"
+                    }
+                    data-aos-duration={
+                      index % 3 === 0
+                        ? "1000"
+                        : index % 3 === 1
+                        ? "1200"
+                        : "1000"
+                    }
                   >
                     <Certificate ImgSertif={certificate.Img} />
                   </div>
@@ -447,7 +500,7 @@ export default function FullWidthTabs() {
             {certificates.length > initialItems && (
               <div className="mt-6 w-full flex justify-start">
                 <ToggleButton
-                  onClick={() => toggleShowMore('certificates')}
+                  onClick={() => toggleShowMore("certificates")}
                   isShowingMore={showAllCertificates}
                 />
               </div>
@@ -459,21 +512,40 @@ export default function FullWidthTabs() {
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 lg:gap-8 gap-5">
                 {techStackLoading && techStacks.length === 0 && (
                   <div className="col-span-full text-center py-10">
-                    <p className="text-gray-400 text-lg">Loading tech stack...</p>
+                    <p className="text-gray-400 text-lg">
+                      Loading tech stack...
+                    </p>
                   </div>
                 )}
                 {!techStackLoading && techStacks.length === 0 && (
                   <div className="col-span-full text-center py-10">
-                    <p className="text-gray-400 text-lg">No tech stack items yet</p>
+                    <p className="text-gray-400 text-lg">
+                      No tech stack items yet
+                    </p>
                   </div>
                 )}
                 {techStacks.map((stack, index) => (
                   <div
                     key={`${stack.language}-${index}`}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
+                    data-aos={
+                      index % 3 === 0
+                        ? "fade-up-right"
+                        : index % 3 === 1
+                        ? "fade-up"
+                        : "fade-up-left"
+                    }
+                    data-aos-duration={
+                      index % 3 === 0
+                        ? "1000"
+                        : index % 3 === 1
+                        ? "1200"
+                        : "1000"
+                    }
                   >
-                    <TechStackIcon TechStackIcon={stack.icon} Language={stack.language} />
+                    <TechStackIcon
+                      TechStackIcon={stack.icon}
+                      Language={stack.language}
+                    />
                   </div>
                 ))}
               </div>

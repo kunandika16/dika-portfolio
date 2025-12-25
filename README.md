@@ -1,4 +1,4 @@
-# Portfolio V5
+<!-- # Portfolio V5
 
 Hello everyone\! 👋
 
@@ -160,23 +160,23 @@ ON storage.objects FOR SELECT TO public USING (bucket_id = 'profile-images');
 -- ---- EXAMPLE DATA INSERTION ----
 
 -- Insert one example project
-INSERT INTO public.projects ("Title", "Description", "Img", "Link", "Github", "Features", "TechStack") 
+INSERT INTO public.projects ("Title", "Description", "Img", "Link", "Github", "Features", "TechStack")
 VALUES (
-    'Example Project Title', 
-    'A simple description for this example project, explaining its main purpose and goals.', 
-    'REPLACE_WITH_YOUR_PROJECT_IMAGE_URL.png', 
-    'REPLACE_WITH_YOUR_LIVE_DEMO_URL.com', 
-    'REPLACE_WITH_YOUR_GITHUB_REPO_URL.com', 
-    '["Main Feature A", "Core Function B", "Key Ability C"]', 
+    'Example Project Title',
+    'A simple description for this example project, explaining its main purpose and goals.',
+    'REPLACE_WITH_YOUR_PROJECT_IMAGE_URL.png',
+    'REPLACE_WITH_YOUR_LIVE_DEMO_URL.com',
+    'REPLACE_WITH_YOUR_GITHUB_REPO_URL.com',
+    '["Main Feature A", "Core Function B", "Key Ability C"]',
     '["React", "Supabase", "Tailwind CSS"]'
 );
 
 -- Insert one example certificate
-INSERT INTO public.certificates ("Img") 
+INSERT INTO public.certificates ("Img")
 VALUES ('REPLACE_WITH_YOUR_CERTIFICATE_IMAGE_URL.png');
 
 -- Insert one example comment
-INSERT INTO public.portfolio_comments (content, user_name) 
+INSERT INTO public.portfolio_comments (content, user_name)
 VALUES ('Created By Fazri Lukman Nurrohman', 'fazrilukman');
 
 ```
@@ -244,4 +244,4 @@ If you have any questions or need help with the setup, feel free to reach out\!
 
 -----
 
-⭐ If this project helped you, please consider giving it a star on GitHub\!
+⭐ If this project helped you, please consider giving it a star on GitHub\! -->

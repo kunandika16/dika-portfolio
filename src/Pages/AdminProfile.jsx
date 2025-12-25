@@ -208,7 +208,7 @@ const AdminProfile = () => {
         icon: "success",
         title: "Berhasil!",
         text: "Profile berhasil diupdate",
-        confirmButtonColor: "#dc2626",
+        confirmButtonColor: "#0ea5e9",
         background: "#1e0a0a",
         color: "#ffffff",
       });
@@ -220,7 +220,7 @@ const AdminProfile = () => {
         icon: "error",
         title: "Error!",
         text: "Gagal menyimpan profile",
-        confirmButtonColor: "#ef4444",
+        confirmButtonColor: "#38bdf8",
         background: "#1e0a0a",
         color: "#ffffff",
       });
@@ -233,7 +233,7 @@ const AdminProfile = () => {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
-          <Loader className="w-8 h-8 animate-spin text-red-500" />
+          <Loader className="w-8 h-8 animate-spin text-sky-500" />
         </div>
       </AdminLayout>
     );
@@ -255,7 +255,7 @@ const AdminProfile = () => {
           {/* Photo Section */}
           <div className="bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
             <div className="flex items-center gap-3 mb-4">
-              <Image className="w-5 h-5 text-red-400" />
+              <Image className="w-5 h-5 text-sky-400" />
               <h2 className="text-xl font-semibold text-white">Foto Profil</h2>
             </div>
             <div className="space-y-4">
@@ -273,8 +273,8 @@ const AdminProfile = () => {
                     file:mr-4 file:py-2 file:px-4
                     file:rounded-lg file:border-0
                     file:text-sm file:font-semibold
-                    file:bg-red-600 file:text-white
-                    hover:file:bg-red-700
+                    file:bg-sky-600 file:text-white
+                    hover:file:bg-sky-700
                     file:cursor-pointer cursor-pointer
                     disabled:opacity-50 disabled:cursor-not-allowed"
                 />
@@ -282,7 +282,7 @@ const AdminProfile = () => {
                   Maksimal 5MB. Format: JPG, PNG, GIF, WebP
                 </p>
                 {uploading && (
-                  <div className="flex items-center gap-2 mt-2 text-red-400">
+                  <div className="flex items-center gap-2 mt-2 text-sky-400">
                     <Loader className="w-4 h-4 animate-spin" />
                     <span className="text-sm">Mengupload...</span>
                   </div>
@@ -308,7 +308,7 @@ const AdminProfile = () => {
                     handleInputChange("photo_url", e.target.value)
                   }
                   placeholder="https://example.com/photo.jpg atau /Photo.jpg"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
 
@@ -321,7 +321,7 @@ const AdminProfile = () => {
                   <img
                     src={profileData.photo_url}
                     alt="Preview"
-                    className="w-32 h-32 rounded-full object-cover border-2 border-red-500"
+                    className="w-32 h-32 rounded-full object-cover border-2 border-sky-500"
                     onError={(e) => (e.target.src = "/Photo.jpg")}
                   />
                 </div>
@@ -332,7 +332,7 @@ const AdminProfile = () => {
           {/* Hero Section */}
           <div className="bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
             <div className="flex items-center gap-3 mb-4">
-              <User className="w-5 h-5 text-red-400" />
+              <User className="w-5 h-5 text-sky-400" />
               <h2 className="text-xl font-semibold text-white">Hero Section</h2>
             </div>
             <div className="space-y-4">
@@ -345,7 +345,7 @@ const AdminProfile = () => {
                   value={profileData.title}
                   onChange={(e) => handleInputChange("title", e.target.value)}
                   placeholder="Frontend Developer"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
               <div>
@@ -359,7 +359,7 @@ const AdminProfile = () => {
                     handleInputChange("subtitle", e.target.value)
                   }
                   placeholder="Network & Telecom Student"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
               <div>
@@ -376,12 +376,12 @@ const AdminProfile = () => {
                           handleTechStackChange(index, e.target.value)
                         }
                         placeholder={`Technology ${index + 1}`}
-                        className="flex-1 px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                        className="flex-1 px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                       />
                       {profileData.tech_stack.length > 1 && (
                         <button
                           onClick={() => removeTechStack(index)}
-                          className="px-3 py-2 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/30"
+                          className="px-3 py-2 bg-sky-500/20 text-sky-400 rounded-lg hover:bg-sky-500/30"
                         >
                           ✕
                         </button>
@@ -391,7 +391,7 @@ const AdminProfile = () => {
                   {profileData.tech_stack.length < 6 && (
                     <button
                       onClick={addTechStack}
-                      className="w-full px-4 py-2 border-2 border-dashed border-gray-600 rounded-lg text-gray-400 hover:border-red-500 hover:text-red-400"
+                      className="w-full px-4 py-2 border-2 border-dashed border-gray-600 rounded-lg text-gray-400 hover:border-sky-500 hover:text-sky-400"
                     >
                       + Tambah Tech Stack
                     </button>
@@ -404,7 +404,7 @@ const AdminProfile = () => {
           {/* Social Links */}
           <div className="bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
             <div className="flex items-center gap-3 mb-4">
-              <Link className="w-5 h-5 text-red-400" />
+              <Link className="w-5 h-5 text-sky-400" />
               <h2 className="text-xl font-semibold text-white">
                 Social Media Links
               </h2>
@@ -421,7 +421,7 @@ const AdminProfile = () => {
                     handleInputChange("github_url", e.target.value)
                   }
                   placeholder="https://github.com/username"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
               <div>
@@ -435,7 +435,7 @@ const AdminProfile = () => {
                     handleInputChange("linkedin_url", e.target.value)
                   }
                   placeholder="https://linkedin.com/in/username"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
               <div>
@@ -449,7 +449,7 @@ const AdminProfile = () => {
                     handleInputChange("instagram_url", e.target.value)
                   }
                   placeholder="https://instagram.com/username"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
             </div>
@@ -458,7 +458,7 @@ const AdminProfile = () => {
           {/* About Section */}
           <div className="bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
             <div className="flex items-center gap-3 mb-4">
-              <User className="w-5 h-5 text-red-400" />
+              <User className="w-5 h-5 text-sky-400" />
               <h2 className="text-xl font-semibold text-white">
                 About Section
               </h2>
@@ -473,7 +473,7 @@ const AdminProfile = () => {
                   value={profileData.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   placeholder="Andika Rian Ansari"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
               <div>
@@ -487,7 +487,7 @@ const AdminProfile = () => {
                   }
                   placeholder="Ceritakan tentang diri Anda..."
                   rows="5"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500 resize-none"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500 resize-none"
                 />
               </div>
               <div>
@@ -499,7 +499,7 @@ const AdminProfile = () => {
                   value={profileData.cv_link}
                   onChange={(e) => handleInputChange("cv_link", e.target.value)}
                   placeholder="https://drive.google.com/..."
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
             </div>
@@ -508,7 +508,7 @@ const AdminProfile = () => {
           {/* Connect With Me Section */}
           <div className="bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
             <div className="flex items-center gap-3 mb-4">
-              <Link className="w-5 h-5 text-red-400" />
+              <Link className="w-5 h-5 text-sky-400" />
               <h2 className="text-xl font-semibold text-white">
                 Connect With Me
               </h2>
@@ -525,7 +525,7 @@ const AdminProfile = () => {
                     handleInputChange("linkedin_connect", e.target.value)
                   }
                   placeholder="https://linkedin.com/in/username"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
               <div>
@@ -539,7 +539,7 @@ const AdminProfile = () => {
                     handleInputChange("instagram_connect", e.target.value)
                   }
                   placeholder="https://instagram.com/username"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
               <div>
@@ -553,7 +553,7 @@ const AdminProfile = () => {
                     handleInputChange("youtube_connect", e.target.value)
                   }
                   placeholder="https://youtube.com/@username"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
               <div>
@@ -567,7 +567,7 @@ const AdminProfile = () => {
                     handleInputChange("github_connect", e.target.value)
                   }
                   placeholder="https://github.com/username"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
               <div>
@@ -581,7 +581,7 @@ const AdminProfile = () => {
                     handleInputChange("tiktok_connect", e.target.value)
                   }
                   placeholder="https://tiktok.com/@username"
-                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-4 py-2 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-sky-500"
                 />
               </div>
             </div>
@@ -592,7 +592,7 @@ const AdminProfile = () => {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-rose-600 text-white rounded-lg hover:from-red-700 hover:to-rose-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-sky-600 to-cyan-600 text-white rounded-lg hover:from-sky-700 hover:to-cyan-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {saving ? (
                 <>

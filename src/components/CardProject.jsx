@@ -34,7 +34,7 @@ const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
       ) : (
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-red-900/50 via-rose-900/50 to-pink-900/50 flex items-center justify-center">
+        <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-sky-900/50 via-cyan-900/50 to-cyan-900/50 flex items-center justify-center">
           <div className="text-white/30 text-6xl">🖼️</div>
         </div>
       )}
@@ -61,7 +61,7 @@ const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleLiveDemo}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:scale-105"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:scale-105"
               >
                 <ExternalLink className="w-4 h-4" />
                 VIEW APP

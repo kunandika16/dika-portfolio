@@ -178,7 +178,7 @@ const AdminCertificates = () => {
                   <p class="mt-3 text-sm text-gray-600">Alternatively, you can use the URL method instead.</p>
                 </div>
               `,
-              confirmButtonColor: '#ef4444'
+              confirmButtonColor: '#38bdf8'
             });
             setSubmitting(false);
             return;
@@ -217,7 +217,7 @@ const AdminCertificates = () => {
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#ef4444',
+      confirmButtonColor: '#38bdf8',
       cancelButtonColor: '#6b7280',
       confirmButtonText: 'Yes, delete it!',
       background: '#1f2937',
@@ -261,7 +261,7 @@ const AdminCertificates = () => {
           </div>
           <button
             onClick={handleOpenModal}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-lg transition-all shadow-lg hover:shadow-xl"
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-700 hover:to-cyan-700 text-white rounded-lg transition-all shadow-lg hover:shadow-xl"
           >
             <Plus className="w-5 h-5" />
             Add Certificate
@@ -276,7 +276,7 @@ const AdminCertificates = () => {
             placeholder="Search certificates by URL..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
           />
         </div>
 
@@ -284,7 +284,7 @@ const AdminCertificates = () => {
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
-              <div className="w-16 h-16 border-4 border-red-500/30 border-t-red-500 rounded-full animate-spin mx-auto mb-4" />
+              <div className="w-16 h-16 border-4 border-sky-500/30 border-t-sky-500 rounded-full animate-spin mx-auto mb-4" />
               <p className="text-gray-400">Loading certificates...</p>
             </div>
           </div>
@@ -327,13 +327,13 @@ const AdminCertificates = () => {
                         href={certificate.Img}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors text-sm"
+                        className="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg transition-colors text-sm"
                       >
                         View
                       </a>
                       <button
                         onClick={() => handleDelete(certificate.id)}
-                        className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors text-sm"
+                        className="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg transition-colors text-sm"
                       >
                         Delete
                       </button>
@@ -397,7 +397,7 @@ const AdminCertificates = () => {
       {/* Add Certificate Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
-          <div className="bg-[#140003] border border-white/10 rounded-xl w-full max-w-md my-8 max-h-[90vh] flex flex-col">
+          <div className="bg-[#030712] border border-white/10 rounded-xl w-full max-w-md my-8 max-h-[90vh] flex flex-col">
             <div className="flex items-center justify-between p-6 border-b border-white/10 flex-shrink-0">
               <h2 className="text-2xl font-bold text-white">Add New Certificate</h2>
               <button
@@ -417,7 +417,7 @@ const AdminCertificates = () => {
                   onClick={() => setUploadMethod('url')}
                   className={`flex-1 px-4 py-2 rounded-md transition-all ${
                     uploadMethod === 'url'
-                      ? 'bg-red-600 text-white'
+                      ? 'bg-sky-600 text-white'
                       : 'text-gray-400 hover:text-white'
                   }`}
                 >
@@ -428,7 +428,7 @@ const AdminCertificates = () => {
                   onClick={() => setUploadMethod('file')}
                   className={`flex-1 px-4 py-2 rounded-md transition-all ${
                     uploadMethod === 'file'
-                      ? 'bg-red-600 text-white'
+                      ? 'bg-sky-600 text-white'
                       : 'text-gray-400 hover:text-white'
                   }`}
                 >
@@ -446,7 +446,7 @@ const AdminCertificates = () => {
                     type="url"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
                     placeholder="https://example.com/certificate.png"
                     required={uploadMethod === 'url'}
                   />
@@ -473,7 +473,7 @@ const AdminCertificates = () => {
                     />
                     <label
                       htmlFor="certificate-file"
-                      className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-white/20 rounded-lg cursor-pointer hover:border-red-500 transition-colors bg-white/5"
+                      className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-white/20 rounded-lg cursor-pointer hover:border-sky-500 transition-colors bg-white/5"
                     >
                       {imageFile ? (
                         <div className="text-center">
@@ -512,7 +512,7 @@ const AdminCertificates = () => {
                     }}
                   />
                   <p 
-                    className="text-red-400 text-sm text-center py-4"
+                    className="text-sky-400 text-sm text-center py-4"
                     style={{ display: 'none' }}
                   >
                     Failed to load image. Please check the {uploadMethod === 'url' ? 'URL' : 'file'}.
@@ -521,7 +521,7 @@ const AdminCertificates = () => {
               )}
               </div>
 
-              <div className="flex gap-3 p-6 border-t border-white/10 bg-[#140003] flex-shrink-0">
+              <div className="flex gap-3 p-6 border-t border-white/10 bg-[#030712] flex-shrink-0">
                 <button
                   type="button"
                   onClick={handleCloseModal}
@@ -532,7 +532,7 @@ const AdminCertificates = () => {
                 <button
                   type="submit"
                   disabled={submitting || uploading}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-lg transition-all disabled:opacity-50"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-700 hover:to-cyan-700 text-white rounded-lg transition-all disabled:opacity-50"
                 >
                   {submitting || uploading ? (
                     <>

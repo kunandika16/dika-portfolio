@@ -7,372 +7,219 @@ import {
   Instagram,
   Sparkles,
   Code2,
-  CloudDownload,
-  Cpu,
-  ShieldCheck,
-  Server,
   Terminal,
+  Cpu,
+  Globe,
+  Database,
+  Layout,
+  Palette,
+  Video,
+  Server,
 } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { supabase } from "../supabase";
 
-// Memoized Components
-const StatusBadge = memo(() => (
-  <div
-    className="inline-block animate-float lg:mx-0"
-    data-aos="zoom-in"
-    data-aos-delay="400"
-  >
-    <div className="relative group">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-rose-500 rounded-full blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-      <div className="relative px-3 sm:px-4 py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10">
-        <span className="bg-gradient-to-r from-red-400 to-rose-400 text-transparent bg-clip-text sm:text-sm text-[0.7rem] font-medium flex items-center">
-          <Sparkles className="sm:w-4 sm:h-4 w-3 h-3 mr-2 text-red-400" />
-          Ready to Innovate
-        </span>
-      </div>
-    </div>
-  </div>
-));
+// --- Components ---
 
-const MainTitle = memo(({ title }) => {
-  // Split title into words for better formatting - add space between words
-  const words = title.split(" ");
+const CuteRobot = memo(() => {
+  const [eyePosition, setEyePosition] = useState({ x: 0, y: 0 });
 
-  // Group words: first 1-2 words on first line, rest on second line
-  const firstLine = words.slice(0, 2).join("  "); // double space
-  const secondLine = words.slice(2).join("  "); // double space
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+
+      // Calculate position relative to center (range -1 to 1)
+      const x = (clientX - innerWidth / 2) / (innerWidth / 2);
+      const y = (clientY - innerHeight / 2) / (innerHeight / 2);
+
+      // Limit eye movement range
+      setEyePosition({
+        x: x * 10, // Max 10px movement
+        y: y * 10,
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   return (
-    <div className="space-y-3" data-aos="fade-up" data-aos-delay="600">
-      <h1
-        className="text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl font-bold"
-        style={{ letterSpacing: "0.05em" }}
-      >
-        {/* First Line */}
-        <span className="relative inline-block">
-          <span className="absolute -inset-2 bg-gradient-to-r from-red-500 to-rose-500 blur-2xl opacity-20"></span>
-          <span className="relative bg-gradient-to-r from-white via-red-100 to-rose-200 bg-clip-text text-transparent">
-            {firstLine}
-          </span>
-        </span>
+    <div className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center animate-float">
+      {/* Robot Head Container */}
+      <div className="relative w-24 h-20 bg-gradient-to-b from-gray-200 to-gray-400 rounded-[1.25rem] shadow-[0_10px_25px_rgba(0,0,0,0.3)] border-2 border-white/50 backdrop-blur-sm z-10">
+        {/* Antennas */}
+        <div className="absolute -top-6 left-4 w-1 h-8 bg-gray-400 rounded-full -rotate-12 origin-bottom">
+          <div className="absolute -top-1.5 -left-0.5 w-2.5 h-2.5 bg-sky-500 rounded-full animate-pulse shadow-[0_0_10px_#0ea5e9]" />
+        </div>
+        <div className="absolute -top-6 right-4 w-1 h-8 bg-gray-400 rounded-full rotate-12 origin-bottom">
+          <div className="absolute -top-1.5 -left-0.5 w-2.5 h-2.5 bg-sky-500 rounded-full animate-pulse shadow-[0_0_10px_#0ea5e9] delay-75" />
+        </div>
 
-        {/* Second Line (if exists) */}
-        {secondLine && (
-          <>
-            <br />
-            <span className="relative inline-block mt-2">
-              <span className="absolute -inset-2 bg-gradient-to-r from-red-500 to-rose-500 blur-2xl opacity-20"></span>
-              <span className="relative bg-gradient-to-r from-red-400 to-rose-400 bg-clip-text text-transparent">
-                {secondLine}
-              </span>
-            </span>
-          </>
-        )}
-      </h1>
+        {/* Face Screen */}
+        <div className="absolute inset-2 bg-[#1a1a1a] rounded-[1rem] shadow-inner overflow-hidden border border-white/10">
+          {/* Eyes Container */}
+          <div className="absolute inset-0 flex items-center justify-center gap-4">
+            {/* Left Eye */}
+            <div className="relative w-6 h-6 bg-[#0a0a0a] rounded-full border border-sky-500/50 shadow-[0_0_10px_rgba(14,165,233,0.3)]">
+              <div
+                className="absolute w-2 h-2 bg-sky-400 rounded-full shadow-[0_0_5px_#38bdf8]"
+                style={{
+                  top: `calc(50% - 4px + ${eyePosition.y * 0.5}px)`,
+                  left: `calc(50% - 4px + ${eyePosition.x * 0.5}px)`,
+                  transition: "all 0.1s ease-out",
+                }}
+              />
+            </div>
+            {/* Right Eye */}
+            <div className="relative w-6 h-6 bg-[#0a0a0a] rounded-full border border-sky-500/50 shadow-[0_0_10px_rgba(14,165,233,0.3)]">
+              <div
+                className="absolute w-2 h-2 bg-sky-400 rounded-full shadow-[0_0_5px_#38bdf8]"
+                style={{
+                  top: `calc(50% - 4px + ${eyePosition.y * 0.5}px)`,
+                  left: `calc(50% - 4px + ${eyePosition.x * 0.5}px)`,
+                  transition: "all 0.1s ease-out",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Screen Glare */}
+          <div className="absolute top-1 right-2 w-6 h-12 bg-white/5 skew-x-12 rounded-full blur-sm" />
+        </div>
+      </div>
+
+      {/* Hand Left */}
+      <div className="absolute top-1/2 -left-6 w-8 h-8 bg-gray-300 rounded-full border-2 border-white/20 shadow-lg animate-[wave_3s_ease-in-out_infinite] origin-right flex items-center justify-center">
+        <div className="w-4 h-4 bg-[#1a1a1a] rounded-full shadow-inner" />
+      </div>
+
+      {/* Hand Right */}
+      <div className="absolute top-1/2 -right-6 w-8 h-8 bg-gray-300 rounded-full border-2 border-white/20 shadow-lg animate-[float_4s_ease-in-out_infinite_reverse] flex items-center justify-center">
+        <div className="w-4 h-4 bg-[#1a1a1a] rounded-full shadow-inner" />
+      </div>
     </div>
   );
 });
 
-const TechStack = memo(({ tech }) => (
-  <div className="px-4 py-2 hidden sm:block rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-sm text-gray-300 hover:bg-white/10 transition-colors">
-    {tech}
-  </div>
-));
+const TechMarquee = memo(({ techStack }) => {
+  // Common icons mapping
+  const iconMap = {
+    React: Code2,
+    Javascript: Terminal,
+    "Node.js": Server,
+    Tailwind: Palette,
+    Canva: Layout,
+    "Adobe Animate": Video,
+    "Adobe Photoshop": Palette,
+    Capcut: Video,
+    Figma: Layout,
+    Default: Cpu,
+  };
 
-const CTAButton = memo(({ href, text, icon: Icon }) => (
-  <a href={href}>
-    <button className="group relative w-[160px]">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-red-600 to-rose-600 rounded-xl opacity-50 blur-md group-hover:opacity-90 transition-all duration-700"></div>
-      <div className="relative h-11 bg-[#020617] backdrop-blur-xl rounded-lg border border-white/10 leading-none overflow-hidden">
-        <div className="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-gradient-to-r from-red-500/20 to-rose-500/20"></div>
-        <span className="absolute inset-0 flex items-center justify-center gap-2 text-sm group-hover:gap-3 transition-all duration-300">
-          <span className="bg-gradient-to-r from-gray-200 to-white bg-clip-text text-transparent font-medium z-10">
-            {text}
-          </span>
-          <Icon
-            className={`w-4 h-4 text-gray-200 ${
-              text === "Contact"
-                ? "group-hover:translate-x-1"
-                : "group-hover:rotate-45"
-            } transform transition-all duration-300 z-10`}
-          />
-        </span>
-      </div>
-    </button>
-  </a>
-));
-
-const SocialLink = memo(({ icon: Icon, link }) => (
-  <a href={link} target="_blank" rel="noopener noreferrer">
-    <button className="group relative p-3">
-      <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-rose-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-      <div className="relative rounded-xl bg-black/50 backdrop-blur-xl p-2 flex items-center justify-center border border-white/10 group-hover:border-red-500/30 transition-all duration-300">
-        <Icon className="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors" />
-      </div>
-    </button>
-  </a>
-));
-
-const LaptopShowcase = memo(() => (
-  <div className="relative w-full max-w-[640px] sm:max-w-[720px] aspect-[4/3]">
-    <div
-      className="absolute -inset-16 opacity-70 blur-3xl"
-      style={{
-        background:
-          "radial-gradient(circle at top, rgba(244,63,94,0.35), transparent 60%)",
-      }}
-    />
-    <div
-      className="absolute -inset-12 opacity-60 blur-3xl"
-      style={{
-        background:
-          "radial-gradient(circle at bottom, rgba(239,68,68,0.25), transparent 60%)",
-      }}
-    />
-    <div className="absolute inset-0 rounded-[36px] bg-gradient-to-br from-white/10 via-white/5 to-transparent opacity-80" />
-    <div className="absolute inset-[1px] rounded-[35px] bg-gradient-to-br from-[#070010]/95 via-[#0e0017]/90 to-[#05000c]/95 border border-white/10 backdrop-blur-2xl shadow-[0_40px_120px_rgba(0,0,0,0.6)]">
-      <div
-        className="absolute inset-0 rounded-[34px] opacity-90"
-        style={{
-          background:
-            "radial-gradient(circle at top, rgba(244,63,94,0.2), transparent 60%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 rounded-[34px] opacity-25"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-      />
-      <div className="absolute inset-0 rounded-[34px] overflow-hidden">
-        <div className="absolute -top-1/2 left-0 right-0 h-1/2 bg-gradient-to-b from-red-500/12 via-red-500/10 to-transparent animate-scanline" />
-        <div className="absolute top-0 -left-full h-full w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-20 animate-[shine_6s_ease-in-out_infinite]" />
-      </div>
-
-      <div className="absolute top-4 left-6 right-6 flex items-center justify-between text-[0.6rem] uppercase tracking-[0.35em] text-gray-400">
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-500/90 shadow-[0_0_10px_rgba(239,68,68,0.8)]" />
-          <span>System Online</span>
-        </div>
-        <span className="text-red-300/80">IT Core</span>
-      </div>
-
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative w-[82%] sm:w-[78%] h-[60%] translate-y-2">
-          <div className="absolute inset-0 rounded-[24px] bg-gradient-to-br from-white/15 via-white/5 to-white/10 p-[1px]">
-            <div className="absolute inset-[1px] rounded-[23px] bg-gradient-to-br from-[#0b1326]/95 via-[#0c1a2d]/90 to-[#0a101f]/95 border border-white/10 shadow-[0_18px_45px_rgba(0,0,0,0.6)]">
-              <div className="absolute inset-0 rounded-[23px] bg-[radial-gradient(circle_at_top,rgba(244,63,94,0.18),transparent_65%)]" />
-              <div className="absolute top-3 left-4 right-4 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-red-400/80" />
-                <span className="w-2 h-2 rounded-full bg-rose-400/60" />
-                <span className="w-2 h-2 rounded-full bg-white/20" />
-                <span className="ml-auto text-[0.55rem] uppercase tracking-[0.2em] text-red-300/70">
-                  console
+  return (
+    <div className="w-full overflow-hidden bg-white/5 border-y border-white/5 backdrop-blur-sm py-4 mt-12">
+      <div className="relative flex overflow-x-hidden group">
+        <div className="flex animate-marquee whitespace-nowrap gap-12 group-hover:[animation-play-state:paused]">
+          {[...techStack, ...techStack].map((tech, index) => {
+            const Icon = iconMap[tech] || iconMap["Default"];
+            return (
+              <div
+                key={index}
+                className="flex items-center gap-3 text-gray-400 hover:text-sky-400 transition-colors cursor-default"
+              >
+                <Icon className="w-5 h-5" />
+                <span className="text-sm font-medium uppercase tracking-wider">
+                  {tech}
                 </span>
               </div>
-
-              <div className="absolute left-4 right-4 top-10 grid grid-cols-[1.2fr_0.8fr] gap-4">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-[0.55rem] text-gray-400">
-                    <Code2 className="w-3 h-3 text-red-300" />
-                    <span>build /app</span>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="h-2 w-4/5 rounded-full bg-gradient-to-r from-red-400/70 to-transparent animate-pulse" />
-                    <div className="h-2 w-3/5 rounded-full bg-gradient-to-r from-rose-400/60 to-transparent" />
-                    <div className="h-2 w-5/6 rounded-full bg-gradient-to-r from-red-400/50 to-transparent" />
-                    <div className="h-2 w-2/3 rounded-full bg-gradient-to-r from-rose-400/40 to-transparent" />
-                    <div className="h-2 w-1/2 rounded-full bg-gradient-to-r from-red-400/40 to-transparent" />
-                  </div>
-                </div>
-                <div className="rounded-xl bg-white/5 border border-white/10 p-3 backdrop-blur">
-                  <div className="flex items-center gap-2 text-[0.55rem] uppercase tracking-[0.2em] text-gray-400">
-                    <Cpu className="w-3 h-3 text-rose-300" />
-                    <span>runtime</span>
-                  </div>
-                  <div className="mt-3 space-y-3">
-                    <div className="h-2 rounded-full bg-white/5 overflow-hidden">
-                      <div className="h-full w-4/5 rounded-full bg-gradient-to-r from-red-400/80 to-rose-400/30 animate-pulse" />
-                    </div>
-                    <div className="h-2 rounded-full bg-white/5 overflow-hidden">
-                      <div className="h-full w-2/3 rounded-full bg-gradient-to-r from-rose-400/70 to-red-400/30" />
-                    </div>
-                    <div className="h-2 rounded-full bg-white/5 overflow-hidden">
-                      <div className="h-full w-3/5 rounded-full bg-gradient-to-r from-red-400/60 to-rose-400/20" />
-                    </div>
-                  </div>
-                </div>
+            );
+          })}
+        </div>
+        <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap gap-12 group-hover:[animation-play-state:paused] ml-12">
+          {[...techStack, ...techStack].map((tech, index) => {
+            const Icon = iconMap[tech] || iconMap["Default"];
+            return (
+              <div
+                key={`dup-${index}`}
+                className="flex items-center gap-3 text-gray-400 hover:text-sky-400 transition-colors cursor-default"
+              >
+                <Icon className="w-5 h-5" />
+                <span className="text-sm font-medium uppercase tracking-wider">
+                  {tech}
+                </span>
               </div>
-
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[0.55rem] text-gray-400">
-                <span className="text-red-300/70">build ok</span>
-                <span>latency 12ms</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-[18%] w-[118%] h-[24%] rounded-[26px] bg-gradient-to-b from-[#0a1326]/90 to-[#0a0f1f]/85 border border-white/10 shadow-[0_14px_30px_rgba(0,0,0,0.6)]">
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-2 rounded-full bg-white/10" />
-            <div className="absolute bottom-2 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-rose-400/50 to-transparent" />
-          </div>
+            );
+          })}
         </div>
       </div>
-
-      <div className="absolute bottom-6 left-6 right-6 space-y-2">
-        <div className="h-1.5 w-2/3 rounded-full bg-gradient-to-r from-red-500/70 to-transparent" />
-        <div className="h-1.5 w-1/2 rounded-full bg-gradient-to-r from-rose-500/60 to-transparent" />
-        <div className="h-1.5 w-3/4 rounded-full bg-gradient-to-r from-red-400/40 to-transparent" />
-      </div>
-
-      <div className="absolute left-5 top-16 hidden sm:flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10 text-[0.65rem] text-gray-300 backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,0.35)] animate-float">
-        <Terminal className="w-4 h-4 text-red-300" />
-        <span>CLI Shell</span>
-      </div>
-      <div className="absolute right-5 top-16 hidden sm:flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10 text-[0.65rem] text-gray-300 backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,0.35)] animate-float-delayed">
-        <CloudDownload className="w-4 h-4 text-rose-300" />
-        <span>Cloud Sync</span>
-      </div>
-      <div className="absolute left-8 bottom-16 hidden sm:flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10 text-[0.65rem] text-gray-300 backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,0.35)] animate-float-delayed">
-        <Server className="w-4 h-4 text-red-300" />
-        <span>Server Node</span>
-      </div>
-      <div className="absolute right-8 bottom-16 hidden sm:flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10 text-[0.65rem] text-gray-300 backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,0.35)] animate-float">
-        <ShieldCheck className="w-4 h-4 text-rose-300" />
-        <span>Secure</span>
-      </div>
     </div>
-  </div>
-));
-
-// Constants
-const TYPING_SPEED = 100;
-const ERASING_SPEED = 50;
-const PAUSE_DURATION = 2000;
+  );
+});
 
 const Home = () => {
   const [text, setText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  // Profile data from database
   const [profileData, setProfileData] = useState({
-    title: "Frontend Developer",
-    subtitle: [
-      "Web Developer",
-      "Design",
-      "Video & Photo Editing",
-      "UI/UX Design",
+    title: "Digital Freelancer",
+    roles: [
+      "Fullstack Developer",
+      "Front-end Developer",
+      "Backend Developer",
+      "UI/UX Designer",
+      "Graphic Designer",
+      "Video Editor",
     ],
+    description:
+      "A creative digital professional transforming ideas into exceptional visual and functional experiences.",
     tech_stack: [
       "React",
       "Javascript",
       "Node.js",
       "Tailwind",
-      "Canva",
-      "Adobe Animate",
-      "Adobe Photoshop",
-      "Capcut",
       "Figma",
+      "Adobe Photoshop",
     ],
-    social_links: [
-      { icon: Github, link: "https://github.com/StartYourProject" },
-      { icon: Linkedin, link: "https://www.linkedin.com/" },
-      { icon: Instagram, link: "https://www.instagram.com/" },
-    ],
+    cv_link: "#",
   });
 
-  // Fetch profile data
+  const TYPING_SPEED = 100;
+  const ERASING_SPEED = 50;
+  const PAUSE_DURATION = 2000;
+
   useEffect(() => {
     const fetchProfile = async () => {
       if (!supabase) return;
-
       try {
-        const { data, error } = await supabase
+        const { data } = await supabase
           .from("profile_settings")
           .select("*")
           .single();
-
         if (data) {
-          // Parse subtitle into array if it's a string
-          let subtitleArray = ["Network & Telecom Student", "Tech Enthusiast"];
-          if (data.subtitle) {
-            // If subtitle contains separator, split it
-            if (data.subtitle.includes("|")) {
-              subtitleArray = data.subtitle.split("|").map((s) => s.trim());
-            } else {
-              subtitleArray = [data.subtitle, "Tech Enthusiast"];
-            }
-          }
-
-          setProfileData({
-            title: data.title || "Frontend Developer",
-            subtitle: subtitleArray,
-            tech_stack: data.tech_stack || [
-              "React",
-              "Javascript",
-              "Node.js",
-              "Tailwind",
-              "Canva",
-              "Adobe Animate",
-              "Adobe Photoshop",
-              "Capcut",
-              "Figma",
-            ],
-            social_links: [
-              {
-                icon: Github,
-                link: data.github_url || "https://github.com/StartYourProject",
-              },
-              {
-                icon: Linkedin,
-                link: data.linkedin_url || "https://www.linkedin.com/",
-              },
-              {
-                icon: Instagram,
-                link: data.instagram_url || "https://www.instagram.com/",
-              },
-            ],
-          });
+          setProfileData((prev) => ({
+            ...prev,
+            description: data.description || prev.description,
+            tech_stack: data.tech_stack || prev.tech_stack,
+            cv_link: data.cv_link || "#",
+          }));
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
       }
     };
-
     fetchProfile();
+    AOS.init({ once: true, duration: 1000 });
   }, []);
 
-  // Optimize AOS initialization
-  useEffect(() => {
-    const initAOS = () => {
-      AOS.init({
-        once: true,
-        offset: 10,
-      });
-    };
-
-    initAOS();
-    window.addEventListener("resize", initAOS);
-    return () => window.removeEventListener("resize", initAOS);
-  }, []);
-
-  useEffect(() => {
-    setIsLoaded(true);
-    return () => setIsLoaded(false);
-  }, []);
-
-  // Optimize typing effect
+  // Typewriter Logic
   const handleTyping = useCallback(() => {
-    const WORDS = profileData.subtitle;
+    const currentRole = profileData.roles[wordIndex];
     if (isTyping) {
-      if (charIndex < WORDS[wordIndex].length) {
-        setText((prev) => prev + WORDS[wordIndex][charIndex]);
+      if (charIndex < currentRole.length) {
+        setText((prev) => prev + currentRole[charIndex]);
         setCharIndex((prev) => prev + 1);
       } else {
         setTimeout(() => setIsTyping(false), PAUSE_DURATION);
@@ -382,11 +229,11 @@ const Home = () => {
         setText((prev) => prev.slice(0, -1));
         setCharIndex((prev) => prev - 1);
       } else {
-        setWordIndex((prev) => (prev + 1) % WORDS.length);
+        setWordIndex((prev) => (prev + 1) % profileData.roles.length);
         setIsTyping(true);
       }
     }
-  }, [charIndex, isTyping, wordIndex, profileData.subtitle]);
+  }, [charIndex, isTyping, wordIndex, profileData.roles]);
 
   useEffect(() => {
     const timeout = setTimeout(
@@ -398,103 +245,79 @@ const Home = () => {
 
   return (
     <div
-      className="min-h-screen bg-[#140003] overflow-hidden px-[5%] sm:px-[5%] lg:px-[10%] pt-32 sm:pt-20 md:pt-0"
+      className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden flex flex-col"
       id="Home"
     >
-      <div
-        className={`relative z-10 transition-all duration-1000 ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <div className="container mx-auto min-h-screen">
-          <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen md:justify-between gap-8 sm:gap-12 lg:gap-20">
-            {/* Left Column */}
-            <div
-              className="w-full lg:w-1/2 space-y-6 sm:space-y-8 text-left lg:text-left order-1 lg:order-1 lg:mt-0"
-              data-aos="fade-right"
-              data-aos-delay="200"
-            >
-              <div className="space-y-4 sm:space-y-6">
-                <MainTitle title={profileData.title} />
+      {/* Main Content Area */}
+      <div className="flex-grow flex flex-col items-center justify-center relative pt-20 pb-12 px-6">
+        {/* Background Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[100px] -z-10" />
 
-                {/* Typing Effect */}
-                <div
-                  className="h-8 flex items-center"
-                  data-aos="fade-up"
-                  data-aos-delay="800"
-                >
-                  <span className="text-xl md:text-2xl bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent font-light">
-                    {text}
-                  </span>
-                  <span className="w-[3px] h-6 bg-gradient-to-t from-[#ef4444] to-[#f43f5e] ml-1 animate-blink"></span>
-                </div>
+        {/* 1. 3D Object / Character */}
+        <div className="mb-4" data-aos="fade-down">
+          <CuteRobot />
+        </div>
 
-                {/* Description */}
-                <p
-                  className="text-base md:text-lg text-gray-400 max-w-xl leading-relaxed font-light"
-                  data-aos="fade-up"
-                  data-aos-delay="1000"
-                >
-                  A creative and multidisciplinary digital professional with a
-                  passion for transforming ideas into exceptional visual and
-                  functional experiences. I specialize in designing, building,
-                  and deploying intuitive, fast, and future-ready web
-                  applications, while also possessing strong expertise in UI/UX
-                  Design, Photo & Video Editing, and Graphic Design.
-                </p>
+        {/* 2. Main Title */}
+        <div
+          className="text-center mb-6"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase relative z-10">
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">
+              Digital
+            </span>
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-500">
+              Freelancer
+            </span>
+          </h1>
+        </div>
 
-                {/* Tech Stack */}
-                <div
-                  className="flex flex-wrap gap-3 justify-start"
-                  data-aos="fade-up"
-                  data-aos-delay="1200"
-                >
-                  {profileData.tech_stack.map((tech, index) => (
-                    <TechStack key={index} tech={tech} />
-                  ))}
-                </div>
+        {/* 3. Subtitle (Typewriter) */}
+        <div
+          className="h-8 mb-6 text-center"
+          data-aos="fade-up"
+          data-aos-delay="400"
+        >
+          <span className="text-xl md:text-2xl font-light text-gray-300 tracking-wide">
+            I am a <span className="font-semibold text-sky-400">{text}</span>
+            <span className="animate-blink">|</span>
+          </span>
+        </div>
 
-                {/* CTA Buttons */}
-                <div
-                  className="flex flex-row gap-3 w-full justify-start"
-                  data-aos="fade-up"
-                  data-aos-delay="1400"
-                >
-                  <CTAButton
-                    href="#Portofolio"
-                    text="Projects"
-                    icon={ExternalLink}
-                  />
-                  <CTAButton href="#Contact" text="Contact" icon={Mail} />
-                </div>
+        {/* 4. Description */}
+        <p
+          className="max-w-2xl text-center text-gray-400 text-base md:text-lg leading-relaxed mb-10"
+          data-aos="fade-up"
+          data-aos-delay="600"
+        >
+          {profileData.description}
+        </p>
 
-                {/* Social Links */}
-                <div
-                  className="flex gap-2 justify-start"
-                  data-aos="fade-up"
-                  data-aos-delay="1600"
-                >
-                  {profileData.social_links.map((social, index) => (
-                    <SocialLink
-                      key={index}
-                      icon={social.icon}
-                      link={social.link}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column - IT Laptop Scene */}
-            <div
-              className="w-full py-0 sm:py-0 lg:w-1/2 h-auto lg:min-h-[750px] xl:min-h-[850px] relative flex items-center justify-center order-2 lg:order-2 mt-0 lg:mt-0"
-              data-aos="fade-left"
-              data-aos-delay="600"
-              style={{ overflow: "visible", perspective: "2000px" }}
-            >
-              <LaptopShowcase />
-            </div>
-          </div>
+        {/* 5. Buttons */}
+        <div
+          className="flex flex-wrap justify-center gap-4"
+          data-aos="fade-up"
+          data-aos-delay="800"
+        >
+          <a
+            href={profileData.cv_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3 rounded-full bg-white text-black font-bold hover:bg-gray-200 transition-colors flex items-center gap-2"
+          >
+            <ExternalLink className="w-4 h-4" />
+            My Resume
+          </a>
+          <a
+            href="#Contact"
+            className="px-8 py-3 rounded-full bg-transparent border border-white/20 text-white font-medium hover:bg-white/10 transition-colors flex items-center gap-2"
+          >
+            <Mail className="w-4 h-4" />
+            Contact Me
+          </a>
         </div>
       </div>
     </div>
